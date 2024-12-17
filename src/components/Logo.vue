@@ -13,7 +13,7 @@
 <style scoped>
   img {
     height: 70%;
-    padding: 5%;
+    margin: 5%;
   }
 
   img:hover {
