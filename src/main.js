@@ -4,14 +4,14 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 import Checker from "@/components/check/Checker.vue";
-import LoginPage from "@/components/LoginPage.vue";
 import {createMemoryHistory, createRouter} from "vue-router";
 import {getCurrentUser} from "@/auth.service.js";
+import AuthPage from "@/components/authentication/AuthPage.vue";
 
 const routes = [
     {
         path: '/',
-        component: LoginPage,
+        component: AuthPage,
     },
     {
         path: '/check',

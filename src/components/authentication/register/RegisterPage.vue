@@ -1,21 +1,20 @@
 <script setup>
-import {login} from "@/auth.service.js";
-import {computed, ref} from "vue";
-import {useRoute, useRouter} from "vue-router";
+import {register} from "@/auth.service.js";
+import {ref} from "vue";
+import {useRouter} from "vue-router";
 
 let username = '';
 let password = '';
 let errorMessage = ref('')
 
-const router = useRouter()
-const route = useRoute()
+const router = useRouter();
 
 function goToCheck() {
   router.push("/check");
 }
 
 async function onSubmit() {
-  login(username, password).then(
+  register(username, password).then(
       () => {
         errorMessage = null;
         goToCheck();
@@ -40,7 +39,7 @@ async function onSubmit() {
       <label class="labels">{{ errorMessage }}</label>
     </div>
 
-    <input type="submit" class="button labels" value="Login">
+    <input type="submit" class="button labels" value="Register">
   </form>
 </template>
 
