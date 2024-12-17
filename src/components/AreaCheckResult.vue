@@ -11,9 +11,21 @@ defineProps({
 
 <template>
   <template v-if="result">
-    <td>{{ result.x }}</td>
-    <td>{{ result.y }}</td>
-    <td>{{ result.r }}</td>
+    <td>{{ result.x.toLocaleString(
+        undefined, // leave undefined to use the visitor's browser
+        // locale or a string like 'en-US' to override it.
+        { maximumFractionDigits: 3 }
+    ) }}</td>
+    <td>{{ result.y.toLocaleString(
+        undefined, // leave undefined to use the visitor's browser
+        // locale or a string like 'en-US' to override it.
+        { maximumFractionDigits: 3 }
+    ) }}</td>
+    <td>{{ result.r.toLocaleString(
+        undefined, // leave undefined to use the visitor's browser
+        // locale or a string like 'en-US' to override it.
+        { maximumFractionDigits: 3 }
+    ) }}</td>
     <td>{{ result.hit ? "Попал" : "Не попал" }}</td>
     <td>{{ result.workingTime }}</td>
     <td>{{(new Date(result.createdAt)).toLocaleTimeString() }}</td>
