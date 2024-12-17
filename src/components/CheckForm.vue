@@ -7,6 +7,7 @@ const emit = defineEmits(["result", "radius"])
 let x = null;
 let y = null;
 let r = null;
+let errorMessage = null;
 
 let xOptions = [
   {label: "--choose x--", value: null},
@@ -55,24 +56,25 @@ function validConstraint(event) {
 }
 
 async function onSubmit(event) {
-  event.preventDefault();
-
   let data = {x, y, r}
 
-  console.log(data)
   let response = await fetch(baseUrl + "/api/check", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify(data)
   });
   if (response.ok) {
     let json = await response.json();
     let result = new AreaCheckResponse(json);
+    errorMessage = null;
     emit("check", {
       result: result
     });
   }
   else {
-    alert("Error: " + response.status)
+    errorMessage = await response.text();
   }
 }
 
@@ -85,7 +87,7 @@ function onRadiusChange() {
 </script>
 
 <template>
-  <form id="coordinates-form" @submit="onSubmit">
+  <form id="coordinates-form" @submit.prevent="onSubmit">
     <div id="x-field" class="value-input">
       <label class="labels" for="x-input">X:</label>
       <select id="x-input" class="labels" v-model="x" required>
@@ -104,6 +106,7 @@ function onRadiusChange() {
         <option v-for="r in rOptions" :value="r.value">{{ r.label }}</option>
       </select>
     </div>
+    <label :v-show="errorMessage !== null">{{ errorMessage }}</label>
 
     <input type="submit" value="Отправить" class="button"/>
   </form>

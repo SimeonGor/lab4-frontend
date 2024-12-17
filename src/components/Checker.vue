@@ -8,7 +8,7 @@ let resultList = ref([]);
 let radius = ref(null);
 
 function onResult({result}) {
-  resultList.value.push(result);
+  resultList.value.unshift(result);
 }
 
 function onRadiusChange({newRadius}) {
@@ -19,9 +19,9 @@ function onRadiusChange({newRadius}) {
 <template>
   <div class="graph-data">
     <div class="graph-container">
-      <Graph v-bind:result-list="resultList" v-bind:radius="radius"/>
+      <Graph v-bind:result-list="resultList" v-bind:radius="radius" @check="onResult"/>
     </div>
-    <CheckForm @radius="onRadiusChange" />
+    <CheckForm @radius="onRadiusChange" @check="onResult"/>
   </div>
   <Table v-bind:result-list="resultList"/>
 </template>

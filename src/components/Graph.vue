@@ -1,5 +1,9 @@
 <script setup>
-import {watchEffect} from "vue";
+
+import {baseUrl} from "@/env.js";
+import {AreaCheckResponse} from "@/AreaCheckResponse.js";
+
+const emit = defineEmits(["check"])
 
 let {resultList, radius} = defineProps({
   resultList: {
@@ -21,30 +25,68 @@ let {resultList, radius} = defineProps({
 })
 
 let XScale = []
-for (let i = -6; i < 6; ++i) {
+for (let i = -5; i < 6; ++i) {
   if (i === 0)
     XScale.push('');
   else
     XScale.push(i)
 }
 let YScale = []
-for (let i = 6; i > -6; --i) {
+for (let i = 5; i > -6; --i) {
   if (i === 0)
     YScale.push('');
   else
     YScale.push(i)
 }
 
-watchEffect(() => {
-  console.log(radius);
-})
+function onPointClick(event) {
+  if (radius === null) {
+    alert("Choose radius value");
+    return;
+  }
+  let point = event.currentTarget.createSVGPoint();
+  point.x = event.clientX;
+  point.y = event.clientY;
+  point = point.matrixTransform(event.currentTarget.getScreenCTM().inverse());
+  let width = event.currentTarget.getBoundingClientRect().width;
+  let height = event.currentTarget.getBoundingClientRect().height;
+  let x = point.x * 12 / width - 6;
+  let y = -(point.y * 12 / height - 6);
+
+  submitPoint({x, y})
+}
+
+async function submitPoint({x, y}) {
+  let data = {x, y, r: radius}
+
+  console.log(data)
+  let response = await fetch(baseUrl + "/api/check", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+  if (response.ok) {
+    let json = await response.json();
+    let result = new AreaCheckResponse(json);
+    emit("check", {
+      result: result
+    });
+  }
+  else {
+    let errorMessage = await response.json();
+    alert(errorMessage.message);
+  }
+}
 
 </script>
 
 <template>
-  <svg class="graph" :height="`${height}`" :width="`${width}`" xmlns="http://www.w3.org/2000/svg">
+  <svg class="graph" :height="`${height}`" :width="`${width}`" xmlns="http://www.w3.org/2000/svg"
+    @click="onPointClick">
     <!-- figure -->
-    <path class="area" :transform="`translate(${width / 2}, ${height/ 2}) scale(${radius ? radius / 2 : 2}, ${radius ? radius/2 : 2})`"
+    <path class="area" :transform="`translate(${width / 2}, ${height/ 2}) scale(${radius !== null ? radius / 2 : 2}, ${radius !== null ? radius/2 : 2})`"
           :d="`m -${width * 0.5 / 6} 0
                     l 0 ${height / 6}
                     l ${width * 0.5 / 6} 0
@@ -88,21 +130,21 @@ watchEffect(() => {
       </text>
     </template>
     <template v-for="(x, index) in XScale">
-      <line class="scaled" :x1="`${width * (index) / 12}`" :y1="`${height / 2 - 4}`"
-            :x2="`${width * (index) / 12}`" :y2="`${height / 2 + 4}`"
+      <line class="scaled" :x1="`${width * (index + 1) / 12}`" :y1="`${height / 2 - 4}`"
+            :x2="`${width * (index + 1) / 12}`" :y2="`${height / 2 + 4}`"
             v-show="radius != null" />
       <text class="scaled"
-            :x="`${width * (index) / 12 - 5}`" :y="`${height / 2 - 10}`"
+            :x="`${width * (index + 1) / 12 - 5}`" :y="`${height / 2 - 10}`"
             v-show="radius != null">
         {{ x }}
       </text>
     </template>
     <template v-for="(y, index) in YScale">
-      <line class="scaled" :x1="`${width / 2 - 4}`" :y1="`${height * (index) / 12}`"
-            :x2="`${width / 2 + 4}`" :y2="`${height * (index) / 12}`"
+      <line class="scaled" :x1="`${width / 2 - 4}`" :y1="`${height * (index + 1) / 12}`"
+            :x2="`${width / 2 + 4}`" :y2="`${height * (index + 1) / 12}`"
             v-show="radius != null" />
       <text class="scaled"
-            :x="`${width / 2 + 10}`" :y="`${height * (index) / 12 + 4}`"
+            :x="`${width / 2 + 10}`" :y="`${height * (index + 1) / 12 + 4}`"
             v-show="radius != null">
         {{ y }}
       </text>
@@ -110,7 +152,7 @@ watchEffect(() => {
 
     <template v-for="result in resultList">
       <circle class="point" :cx="`${width * (result.x + 6) / 12}`" :cy="`${height * (6 - result.y) / 12}`"
-              :r="result.r" :hit="result.hit"
+              :hit="result.hit"
               v-show="radius === result.r"/>
     </template>
   </svg>
