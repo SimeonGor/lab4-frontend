@@ -7,6 +7,7 @@ import Checker from "@/components/check/Checker.vue";
 import {createMemoryHistory, createRouter} from "vue-router";
 import {getCurrentUser} from "@/auth.service.js";
 import AuthPage from "@/components/authentication/AuthPage.vue";
+import NotFound from "@/components/NotFound.vue";
 
 const routes = [
     {
@@ -17,6 +18,10 @@ const routes = [
         path: '/check',
         component: Checker,
         meta: { authorized: true }
+    },
+    {
+        path: '/*',
+        component: NotFound,
     }
 ]
 
