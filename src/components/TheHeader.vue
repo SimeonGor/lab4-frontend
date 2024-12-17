@@ -4,18 +4,6 @@ import Logo from "@/components/Logo.vue";
 import StudentDetail from "@/components/StudentDetail.vue";
 import {RouterLink} from "vue-router";
 import {logout} from "@/auth.service.js";
-
-let items = [
-  {
-    label: "Login",
-    route: "/"
-  },
-  {
-    label: "Checker",
-    route: "/check"
-  }
-];
-
 </script>
 
 <template>

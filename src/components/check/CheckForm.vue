@@ -56,7 +56,7 @@ function validConstraint(event) {
   }
 }
 
-async function onSubmit(event) {
+async function onSubmit() {
   let data = {x, y, r}
 
   let response = await fetch(baseUrl + "/api/check", {

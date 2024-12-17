@@ -26,10 +26,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const authorized = to.meta.authorized;
-    const currentUser = getCurrentUser();
+    const { authorized } = to.meta;
+    const { expirationDate } = getCurrentUser();
     if (authorized) {
-        if (!currentUser.expirationDate || currentUser.expirationDate < Date.now()) {
+        if (!expirationDate || expirationDate < Date.now()) {
             return next({ path: '/' })
         }
     }

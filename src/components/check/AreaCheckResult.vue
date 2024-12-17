@@ -1,5 +1,5 @@
 <script setup>
-import { AreaCheckResponse } from "../../AreaCheckResponse.js"
+import { AreaCheckResponse } from "@/AreaCheckResponse.js"
 
 defineProps({
   result: {
