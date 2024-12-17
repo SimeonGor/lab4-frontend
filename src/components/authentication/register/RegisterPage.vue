@@ -50,9 +50,8 @@ form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 60%;
+  width: 100%;
   padding: 20px;
-  margin: 30px;
 }
 
 form .labels {
@@ -86,6 +85,12 @@ form .value-input {
   flex-direction: row;
   align-items: stretch;
   margin: 10px;
+}
+
+@media (max-width: 671px) {
+  form .value-input {
+    flex-direction: column;
+  }
 }
 
 form input {

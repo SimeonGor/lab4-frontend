@@ -127,6 +127,12 @@ function onRadiusChange() {
     margin: auto auto auto 10%;
   }
 
+  @media (max-width: 671px) {
+    form {
+      width: 80%;
+    }
+  }
+
   form .labels {
     margin-right: 10px;
     font-family: "fantasy", sans-serif;
@@ -158,6 +164,12 @@ function onRadiusChange() {
     flex-direction: row;
     align-items: stretch;
     margin: 10px;
+  }
+
+  @media (max-width: 671px) {
+    form .value-input {
+      flex-direction: column;
+    }
   }
 
   form input {

@@ -54,6 +54,13 @@ async function loadResulList() {
   width: 80%;
 }
 
+@media (max-width: 671px) {
+  .graph-data {
+    flex-direction: column;
+    align-items: baseline;
+  }
+}
+
 .graph-container {
   margin: 30px;
 }

@@ -25,4 +25,14 @@
 .student-details span {
   margin: 2%;
 }
+
+@media(max-width: 671px) {
+  .student-details {
+    flex-direction: row;
+    font-size: 1em;
+  }
+  student-details span {
+    margin: 5px;
+  }
+}
 </style>

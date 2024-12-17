@@ -40,4 +40,20 @@ import {logout} from "@/auth.service.js";
   background-color: #301781;
 
 }
+
+@media (max-width: 671px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 150px;
+  }
+  .navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #301781;
+
+  }
+}
 </style>

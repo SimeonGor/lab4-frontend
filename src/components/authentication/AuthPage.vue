@@ -12,8 +12,8 @@ import RegisterPage from "@/components/authentication/register/RegisterPage.vue"
 <template>
   <Tabs value="Login" class="tab">
     <TabList class="tabs-header">
-      <Tab class="labels" value="Login">Login</Tab>
-      <Tab class="labels" value="Register">Register</Tab>
+      <Tab class="header" value="Login">Login</Tab>
+      <Tab class="header" value="Register">Register</Tab>
     </TabList>
     <TabPanels>
       <TabPanel class="panel" value="Login">
@@ -41,13 +41,14 @@ import RegisterPage from "@/components/authentication/register/RegisterPage.vue"
 .panel {
   display: flex;
   flex-direction: column;
-  --p-tabs-tabpanel-padding: 0;
+  --p-tabs-tablist-border-width: 0;
 }
 
-.labels {
+.tabs-header .header {
   margin-right: 10px;
   font-family: "fantasy", sans-serif;
   font-size: 1em;
   color: #301781;
+  --p-tabs-tab-border-width: 0;
 }
 </style>
