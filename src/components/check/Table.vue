@@ -1,6 +1,6 @@
 <script setup>
 
-import AreaCheckResult from "@/components/AreaCheckResult.vue";
+import AreaCheckResult from "@/components/check/AreaCheckResult.vue";
 
 defineProps({
   resultList: {

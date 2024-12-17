@@ -1,6 +1,7 @@
 <script setup>
 import {baseUrl} from "@/env.js";
 import {AreaCheckResponse} from "@/AreaCheckResponse.js";
+import {getAuthHeader} from "@/auth.service.js";
 
 const emit = defineEmits(["result", "radius"])
 
@@ -62,7 +63,7 @@ async function onSubmit(event) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1c2VybmFtZSIsImV4cCI6MTczNDUzMTg3N30.Xc-nsYQDVDeejgO3cjJXg13KmVvMqXiAjJccKw-tr8k",
+      ...getAuthHeader()
     },
     body: JSON.stringify(data)
   });
@@ -107,9 +108,9 @@ function onRadiusChange() {
         <option v-for="r in rOptions" :value="r.value">{{ r.label }}</option>
       </select>
     </div>
-    <label :v-show="errorMessage !== null">{{ errorMessage }}</label>
+    <label v-show="errorMessage !== null">{{ errorMessage }}</label>
 
-    <input type="submit" value="Отправить" class="button"/>
+    <input type="submit" value="Отправить" class="button labels"/>
   </form>
 
 </template>

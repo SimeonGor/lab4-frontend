@@ -2,6 +2,7 @@
 
 import {baseUrl} from "@/env.js";
 import {AreaCheckResponse} from "@/AreaCheckResponse.js";
+import {getAuthHeader} from "@/auth.service.js";
 
 const emit = defineEmits(["check"])
 
@@ -59,12 +60,11 @@ function onPointClick(event) {
 async function submitPoint({x, y}) {
   let data = {x, y, r: radius}
 
-  console.log(data)
   let response = await fetch(baseUrl + "/api/check", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1c2VybmFtZSIsImV4cCI6MTczNDUzMTg3N30.Xc-nsYQDVDeejgO3cjJXg13KmVvMqXiAjJccKw-tr8k",
+      ...getAuthHeader()
     },
     body: JSON.stringify(data)
   });

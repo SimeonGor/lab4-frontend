@@ -1,7 +1,11 @@
 <script setup>
 import TheHeader from "@/components/TheHeader.vue";
-import Checker from "@/components/Checker.vue";
+import Checker from "@/components/check/Checker.vue";
 import LoginPage from "@/components/LoginPage.vue";
+import {RouterLink, RouterView} from "vue-router";
+import {createMemoryHistory, createRouter} from "vue-router";
+
+
 
 </script>
 
@@ -11,8 +15,7 @@ import LoginPage from "@/components/LoginPage.vue";
   </header>
 
   <main>
-    <Checker />
-    <LoginPage />
+    <RouterView />
   </main>
 </template>
 

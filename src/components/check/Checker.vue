@@ -1,7 +1,7 @@
 <script setup>
-import Table from "@/components/Table.vue";
-import Graph from "@/components/Graph.vue";
-import CheckForm from "@/components/CheckForm.vue";
+import Table from "@/components/check/Table.vue";
+import Graph from "@/components/check/Graph.vue";
+import CheckForm from "@/components/check/CheckForm.vue";
 import {onMounted, ref} from "vue";
 import {baseUrl} from "@/env.js";
 import {AreaCheckResponse} from "@/AreaCheckResponse.js";
