@@ -61,7 +61,8 @@ async function onSubmit(event) {
   let response = await fetch(baseUrl + "/api/check", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1c2VybmFtZSIsImV4cCI6MTczNDUzMTg3N30.Xc-nsYQDVDeejgO3cjJXg13KmVvMqXiAjJccKw-tr8k",
     },
     body: JSON.stringify(data)
   });
@@ -114,7 +115,7 @@ function onRadiusChange() {
 </template>
 
 <style scoped>
-  #coordinates-form {
+  form {
     background-color: #76E2F4;
     border: 2px solid #301781;
     display: flex;
@@ -125,14 +126,14 @@ function onRadiusChange() {
     margin: auto auto auto 10%;
   }
 
-  #coordinates-form .labels {
+  form .labels {
     margin-right: 10px;
     font-family: "fantasy", sans-serif;
     font-size: 1em;
     color: #301781;
   }
 
-  #coordinates-form .button {
+  form .button {
     color: #F4F4EC;
     margin: 20px 5px 0;
     border-radius: 5%;
@@ -143,7 +144,7 @@ function onRadiusChange() {
     border: 2px solid #301781;
   }
 
-  #coordinates-form .button:hover {
+  form .button:hover {
     color: #301781;
     transition: 0.5s;
     border: 2px solid #301781;
@@ -151,14 +152,14 @@ function onRadiusChange() {
   }
 
 
-  #coordinates-form .value-input {
+  form .value-input {
     display: flex;
     flex-direction: row;
     align-items: stretch;
     margin: 10px;
   }
 
-  #coordinates-form input {
+  form input {
     margin: 0.5%;
     background-color: #F4F4EC;
   }

@@ -28,15 +28,15 @@ defineProps({
     ) }}</td>
     <td>{{ result.hit ? "Попал" : "Не попал" }}</td>
     <td>{{ result.workingTime }}</td>
-    <td>{{(new Date(result.createdAt)).toLocaleTimeString() }}</td>
+    <td>{{ new Date(result.createdAt[0], result.createdAt[1] - 1, result.createdAt[2]).toLocaleDateString() }}</td>
   </template>
   <template v-else>
     <th scope="col">X</th>
     <th scope="col">Y</th>
     <th scope="col">R</th>
     <th scope="col">Результат попадания</th>
-    <th scope="col">Время отправки</th>
     <th scope="col">Время исполнения (мс)</th>
+    <th scope="col">Время отправки</th>
   </template>
 </template>
 

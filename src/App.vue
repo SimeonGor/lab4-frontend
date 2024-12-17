@@ -1,6 +1,7 @@
 <script setup>
 import TheHeader from "@/components/TheHeader.vue";
 import Checker from "@/components/Checker.vue";
+import LoginPage from "@/components/LoginPage.vue";
 
 </script>
 
@@ -11,6 +12,7 @@ import Checker from "@/components/Checker.vue";
 
   <main>
     <Checker />
+    <LoginPage />
   </main>
 </template>
 

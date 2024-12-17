@@ -2,7 +2,9 @@
 import Table from "@/components/Table.vue";
 import Graph from "@/components/Graph.vue";
 import CheckForm from "@/components/CheckForm.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import {baseUrl} from "@/env.js";
+import {AreaCheckResponse} from "@/AreaCheckResponse.js";
 
 let resultList = ref([]);
 let radius = ref(null);
@@ -14,6 +16,25 @@ function onResult({result}) {
 function onRadiusChange({newRadius}) {
   radius.value = newRadius;
 }
+
+onMounted(() => loadResulList());
+
+async function loadResulList() {
+  let response = await fetch(baseUrl + "/api/check", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1c2VybmFtZSIsImV4cCI6MTczNDUzMTg3N30.Xc-nsYQDVDeejgO3cjJXg13KmVvMqXiAjJccKw-tr8k",
+    }
+  });
+  if (response.ok) {
+    let json = await response.json();
+    for (let i in json) {
+      resultList.value.unshift(new AreaCheckResponse(json[i]))
+    }
+  }
+}
+
 </script>
 
 <template>

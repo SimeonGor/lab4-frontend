@@ -63,7 +63,8 @@ async function submitPoint({x, y}) {
   let response = await fetch(baseUrl + "/api/check", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1c2VybmFtZSIsImV4cCI6MTczNDUzMTg3N30.Xc-nsYQDVDeejgO3cjJXg13KmVvMqXiAjJccKw-tr8k",
     },
     body: JSON.stringify(data)
   });
@@ -151,7 +152,7 @@ async function submitPoint({x, y}) {
     </template>
 
     <template v-for="result in resultList">
-      <circle class="point" :cx="`${width * (result.x + 6) / 12}`" :cy="`${height * (6 - result.y) / 12}`"
+      <circle class="point" :cx="`${width * (result.x + 6) / 12}`" :cy="`${height * (6 - result.y) / 12}`" r="2"
               :hit="result.hit"
               v-show="radius === result.r"/>
     </template>
