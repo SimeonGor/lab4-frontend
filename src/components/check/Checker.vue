@@ -5,6 +5,7 @@ import CheckForm from "@/components/check/CheckForm.vue";
 import {onMounted, ref} from "vue";
 import {baseUrl} from "@/env.js";
 import {AreaCheckResponse} from "@/AreaCheckResponse.js";
+import {getAuthHeader} from "@/auth.service.js";
 
 let resultList = ref([]);
 let radius = ref(null);
@@ -24,7 +25,7 @@ async function loadResulList() {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1c2VybmFtZSIsImV4cCI6MTczNDUzMTg3N30.Xc-nsYQDVDeejgO3cjJXg13KmVvMqXiAjJccKw-tr8k",
+      ...getAuthHeader()
     }
   });
   if (response.ok) {
