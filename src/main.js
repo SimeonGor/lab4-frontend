@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 import Checker from "@/components/check/Checker.vue";
-import {createMemoryHistory, createRouter, createWebHashHistory} from "vue-router";
+import {createRouter, createWebHashHistory} from "vue-router";
 import {getCurrentUser} from "@/auth.service.js";
 import AuthPage from "@/components/authentication/AuthPage.vue";
 import NotFound from "@/components/NotFound.vue";
