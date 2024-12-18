@@ -10,7 +10,7 @@ let errorMessage = ref('')
 const router = useRouter()
 
 function goToCheck() {
-  router.push("/check");
+  router.replace("/check");
 }
 
 async function onSubmit() {
@@ -29,11 +29,11 @@ async function onSubmit() {
   <form @submit.prevent="onSubmit">
     <div class="value-input">
       <label for="username" class="labels">Username</label>
-      <input type="text" v-model="username" name="username" class="labels" required />
+      <input type="text" v-model="username" name="username" class="labels" minlength="6" maxlength="20" required />
     </div>
     <div class="value-input">
       <label for="password" class="labels">Password</label>
-      <input type="password" v-model="password" name="password" class="labels" required />
+      <input type="password" v-model="password" name="password" class="labels" minlength="8" maxlength="30" required />
     </div>
     <div v-if="errorMessage" class="value-input">
       <label class="labels">{{ errorMessage }}</label>

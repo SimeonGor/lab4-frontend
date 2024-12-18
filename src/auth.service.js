@@ -23,7 +23,8 @@ export async function login(username, password) {
         localStorage.setItem("token", JSON.stringify(token));
         return token;
     } else {
-        throw new Error("Invalid username or password");
+        let errorMessage = await response.json();
+        throw new Error(errorMessage.message);
     }
 }
 
@@ -42,7 +43,7 @@ export async function register(username, password) {
         localStorage.setItem("token", JSON.stringify(token));
         return token;
     } else {
-        throw new Error("Invalid username or password");
+        throw new Error(await response.text());
     }
 }
 
