@@ -1,5 +1,5 @@
 <script setup>
-import {baseUrl} from "@/env.js";
+import {BACKEND_URL} from "@/env.js";
 import {AreaCheckResponse} from "@/AreaCheckResponse.js";
 import {getAuthHeader} from "@/auth.service.js";
 
@@ -59,7 +59,7 @@ function validConstraint(event) {
 async function onSubmit() {
   let data = {x, y, r}
 
-  let response = await fetch(baseUrl + "/api/check", {
+  let response = await fetch(BACKEND_URL + "/api/check", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

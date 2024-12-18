@@ -1,4 +1,4 @@
-import {baseUrl} from "@/env.js";
+import {BACKEND_URL} from "@/env.js";
 
 export function getCurrentUser() {
     return JSON.parse(localStorage.getItem("token") || "{}");
@@ -9,7 +9,7 @@ export function logout() {
 }
 
 export async function login(username, password) {
-    const response = await fetch(baseUrl + '/api/auth/login', {
+    const response = await fetch(BACKEND_URL + '/api/auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ export async function login(username, password) {
 }
 
 export async function register(username, password) {
-    const response = await fetch(baseUrl + '/api/auth/register', {
+    const response = await fetch(BACKEND_URL + '/api/auth/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

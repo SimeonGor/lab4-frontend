@@ -3,7 +3,7 @@ import Table from "@/components/check/Table.vue";
 import Graph from "@/components/check/Graph.vue";
 import CheckForm from "@/components/check/CheckForm.vue";
 import {onMounted, ref} from "vue";
-import {baseUrl} from "@/env.js";
+import {BACKEND_URL} from "@/env.js";
 import {AreaCheckResponse} from "@/AreaCheckResponse.js";
 import {getAuthHeader} from "@/auth.service.js";
 
@@ -21,7 +21,7 @@ function onRadiusChange({newRadius}) {
 onMounted(() => loadResulList());
 
 async function loadResulList() {
-  let response = await fetch(baseUrl + "/api/check", {
+  let response = await fetch(BACKEND_URL + "/api/check", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
